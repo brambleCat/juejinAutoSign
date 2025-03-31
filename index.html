@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>掘金自动签到测试</title>
+    <script src="sign.js"></script>
+</head>
+<body>
+    <h1>掘金自动签到测试</h1>
+    <button onclick="testSign()">测试签到</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testSign() {
+            const result = await signJuejin({
+                username: '测试账号',
+                password: '测试密码'
+            });
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        }
+    </script>
+</body>
+</html>
