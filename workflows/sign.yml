@@ -1,0 +1,36 @@
+name: Juejin Auto Sign
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天UTC时间1点（北京时间9点）
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run Auto Sign
+        run: npm run sign
+        env:
+          JUEJIN_USER: ${{ secrets.JUEJIN_USER }}
+          JUEJIN_PWD: ${{ secrets.JUEJIN_PWD }}
+      
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: sign-logs
+          path: |
+            *.log
