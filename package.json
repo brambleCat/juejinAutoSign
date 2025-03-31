@@ -1,0 +1,13 @@
+{
+  "name": "juejin-auto-sign",
+  "version": "1.0.0",
+  "description": "掘金自动签到工具",
+  "main": "sign.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sign": "node -e \"require('./sign.js').signJuejin({username: process.env.JUEJIN_USER, password: process.env.JUEJIN_PWD}).then(console.log).catch(console.error)\""
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  }
+}
